@@ -25,9 +25,9 @@ interface InputProps {
 }
 
 export const Input = ({
+  id,
   type,
   value,
-  id,
   name = "",
   placeholder = "",
   isValid = true,
