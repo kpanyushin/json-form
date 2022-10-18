@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Input } from "./Input";
+import { Input, InputType } from "./Input";
 
 describe("Input component", () => {
   it.each(["text", "textarea", "number", "radio", "checkbox", "date"])(
@@ -9,9 +9,9 @@ describe("Input component", () => {
         <Input
           id={type}
           name={type}
-          type={type}
           value={type}
           placeholder={type}
+          type={type as InputType}
         />
       );
       const input = screen.getByPlaceholderText(type);
