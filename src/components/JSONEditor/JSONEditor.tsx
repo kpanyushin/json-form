@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import Editor, { OnMount, OnValidate } from "@monaco-editor/react";
 
 import { prettifyJsonString } from "../../utils/prettifyJson";
@@ -8,15 +8,14 @@ import styles from "./JSONEditor.module.css";
 interface JSONEditorProps {
   defaultValue?: string;
   onChange?: (value: string) => void;
-  children?: (args: any) => void;
+  onValidate?: (errors: string[]) => void;
 }
 
 export const JSONEditor = ({
   defaultValue = "",
   onChange = () => {},
-  children,
+  onValidate = () => {},
 }: JSONEditorProps): JSX.Element => {
-  const [errors, setErrors] = useState<string[]>([]);
   const editorRef = useRef(null);
   const handleEditorDidMount: OnMount = (editor) => {
     editorRef.current = editor;
@@ -31,9 +30,9 @@ export const JSONEditor = ({
       const errorMessage = markers.map(
         ({ startLineNumber, message }) => `line ${startLineNumber}: ${message}`
       );
-      setErrors(errorMessage);
+      onValidate(errorMessage);
     },
-    [setErrors]
+    [onValidate]
   );
 
   const handleEditorChange = useCallback(
@@ -45,24 +44,21 @@ export const JSONEditor = ({
   );
 
   return (
-    <>
-      <Editor
-        className={styles.wrapper}
-        height="50vh"
-        language="json"
-        options={{
-          automaticLayout: true,
-          autoClosingBrackets: "always",
-          autoClosingQuotes: "always",
-          formatOnPaste: true,
-          formatOnType: true,
-          scrollBeyondLastLine: false,
-        }}
-        onMount={handleEditorDidMount}
-        onChange={handleEditorChange}
-        onValidate={handleEditorValidation}
-      />
-      {children && children({ errors })}
-    </>
+    <Editor
+      className={styles.wrapper}
+      height="50vh"
+      language="json"
+      options={{
+        automaticLayout: true,
+        autoClosingBrackets: "always",
+        autoClosingQuotes: "always",
+        formatOnPaste: true,
+        formatOnType: true,
+        scrollBeyondLastLine: false,
+      }}
+      onMount={handleEditorDidMount}
+      onChange={handleEditorChange}
+      onValidate={handleEditorValidation}
+    />
   );
 };
