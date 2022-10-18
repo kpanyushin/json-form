@@ -6,7 +6,7 @@ export const jsonSchema = yup
   .shape({
     title: yup.string().notRequired(),
     desciption: yup.string().notRequired(),
-    properties: yup.lazy((obj) =>
+    fields: yup.lazy((obj) =>
       yup
         .object(
           mapValues(obj, () =>
@@ -29,25 +29,27 @@ export const jsonSchema = yup
         .required("Form inputs required")
     ),
     buttons: yup.lazy((obj) =>
-    yup
-      .object(
-        mapValues(obj, () =>
-          yup.object().shape({
-            type: yup
-              .mixed()
-              .oneOf(
-                ["submit", "reset", "button"],
-                "Supported types of buttons - submit, reset, button"
-              )
-              .required("Type of button is required. At least one should be submit"),
-            title: yup.string().required("Title is required"),
-            required: yup.boolean().notRequired(),
-            value: yup.mixed().notRequired(),
-            placeholder: yup.string().notRequired(),
-          })
+      yup
+        .object(
+          mapValues(obj, () =>
+            yup.object().shape({
+              type: yup
+                .mixed()
+                .oneOf(
+                  ["submit", "reset", "button"],
+                  "Supported types of buttons - submit, reset, button"
+                )
+                .required(
+                  "Type of button is required. At least one should be submit"
+                ),
+              title: yup.string().required("Title is required"),
+              required: yup.boolean().notRequired(),
+              value: yup.mixed().notRequired(),
+              placeholder: yup.string().notRequired(),
+            })
+          )
         )
-      )
-      .nullable()
-  ),
+        .nullable()
+    ),
   })
   .nullable();
