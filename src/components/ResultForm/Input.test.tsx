@@ -1,5 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { Input, InputType } from "./Input";
+
+import { InputType } from "../../types/types";
+import { Input } from "./Input";
 
 describe("Input component", () => {
   it.each(["text", "textarea", "number", "radio", "checkbox", "date"])(
