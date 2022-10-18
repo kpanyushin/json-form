@@ -1,8 +1,10 @@
 import BootstrapForm from "react-bootstrap/Form";
 
-interface ComponentsMap {
+import { InputType } from '../../types/types';
+
+type ComponentsMap = {
   [key: string]: React.ElementType;
-}
+};
 
 const componentsMap: ComponentsMap = {
   text: BootstrapForm.Control,
@@ -14,7 +16,7 @@ const componentsMap: ComponentsMap = {
 };
 
 interface InputProps {
-  type: string;
+  type: InputType;
   value: string | number | boolean;
   id: string;
   name?: string;

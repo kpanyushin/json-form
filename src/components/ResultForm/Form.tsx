@@ -3,8 +3,8 @@ import BootstrapForm from "react-bootstrap/Form";
 
 interface FormProps {
   onSubmit?: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
-  onReset?: (values: FormikValues) => void;
-  children: React.ReactElement;
+  onReset?: (values?: FormikValues) => void;
+  children: React.ReactNode;
 }
 
 export const Form = ({

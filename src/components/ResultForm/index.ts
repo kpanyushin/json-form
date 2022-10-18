@@ -1,1 +1,1 @@
-export { ResultForm } from './ResultForm';
+export { ResultForm } from "./ResultForm";

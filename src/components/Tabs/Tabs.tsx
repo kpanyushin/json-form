@@ -2,31 +2,22 @@ import { useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import BootstrapTabs from "react-bootstrap/Tabs";
 
-import { ConfigTab } from "./ConfigTab/ConfigTab";
-import { ResultTab } from "./ResultTab/ResultTab";
+import { ResultForm } from "../ResultForm";
+import { stubConfig } from "../../utils/stubConfig";
+import { ConfigForm } from "../ConfigForm/ConfigForm";
 
-export interface ConfigProps {
-  title?: string;
-  description?: string;
-  properties: {
-    [key: string]: {
-      title: string;
-      type: string;
-      [key: string]: string | boolean | number;
-    };
-  };
-}
+import { Config } from "../../types/types";
 
 export const Tabs = (): JSX.Element => {
-  const [config, setConfig] = useState<ConfigProps | null>(null);
+  const [schema, setSchema] = useState<Config | null>(null);
   const [activeKey, setActiveKey] = useState<string>("config");
   const handleSelect = (key: string | null) => {
     if (!key) return;
 
     setActiveKey(key);
   };
-  const handleConfigSubmit = (value: string) => {
-    setConfig(JSON.parse(value));
+  const handleConfigSubmit = (config: string) => {
+    setSchema(JSON.parse(config));
     setActiveKey("result");
   };
 
@@ -40,10 +31,13 @@ export const Tabs = (): JSX.Element => {
       onSelect={handleSelect}
     >
       <Tab eventKey="config" title="Config">
-        <ConfigTab onSubmit={handleConfigSubmit} />
+        <ConfigForm
+          config={stubConfig as Config}
+          onSubmit={handleConfigSubmit}
+        />
       </Tab>
       <Tab eventKey="result" title="Result">
-        <ResultTab config={config} />
+        {schema && <ResultForm schema={schema} />}
       </Tab>
     </BootstrapTabs>
   );
