@@ -1,6 +1,75 @@
-# Getting Started with Create React App
+# Schema Description
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Usual attributes (`type`, `name`, `value`, `placeholder`, etc.) for `input` and `textarea` are used.
+Supported types of fields - `text`, `number`, `date`, `radio`, `checkbox`, `textarea`.
+Several `radio` inputs with equal `name` attribute are switchable.
+There should be at least one element in `fields` to create form.
+
+**Schema example:**
+
+```json
+{
+  "title": "Simple form",
+  "description": "Simple form description",
+  "fields": {
+    "firstName": {
+      "type": "text",
+      "title": "First name",
+      "value": "Kirill",
+      "required": true
+    },
+    "lastName": {
+      "type": "text",
+      "title": "Last name",
+      "value": "Panyushin"
+    },
+    "telephone": {
+      "type": "text",
+      "title": "Telephone"
+    },
+    "experience": {
+      "type": "number",
+      "title": "Years of experience",
+      "value": 6
+    },
+    "bio": {
+      "type": "textarea",
+      "title": "Description"
+    },
+    "birth": {
+      "type": "date",
+      "title": "Date of birth",
+      "value": "1993-01-02"
+    },
+    "js": {
+      "type": "radio",
+      "name": "language",
+      "title": "Javascript",
+      "value": "Javascript"
+    },
+    "cpp": {
+      "type": "radio",
+      "name": "language",
+      "title": "C++",
+      "value": "C++"
+    },
+    "check": {
+      "type": "checkbox",
+      "title": "Checkbox example"
+    }
+  },
+  "buttons": {
+    "submit": {
+      "title": "Submit",
+      "type": "submit"
+    },
+    "cancel": {
+      "title": "Cancel",
+      "type": "reset"
+    }
+  }
+}
+```
 
 ## Available Scripts
 
@@ -28,19 +97,3 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
